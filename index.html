@@ -11,8 +11,11 @@
 </head>
 
 <body>
-    <div>
-
+    <div class="container-fluid">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hello!</strong> Please do not copy this code to avoid virus on your system
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -31,12 +34,13 @@
                                 JS ASSIGNMENT
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li> <a class="dropdown-item" href="day6.html">Day 6</a> </li>
-                                <li> <a class="dropdown-item" href="day5.html">Day 5</a> </li>
-                                <li> <a class="dropdown-item" href="day2.html">Day 4</a> </li>
-                                <li> <a class="dropdown-item" href="day3.html">Day 3</a> </li>
-                                <li> <a class="dropdown-item" href="day4.html">Day 2</a> </li>
-                                <li> <a class="dropdown-item" href="index.html">Day 1</a> </li>
+                                <li> <a class="dropdown-item" href="index.html">Day 1</a></li>
+                                <li> <a class="dropdown-item" href="day2.html">Day 2</a></li>
+                                <li> <a class="dropdown-item" href="day3.html">Day 3</a></li>
+                                <li> <a class="dropdown-item" href="day4.html">Day 4</a></li>
+                                <li> <a class="dropdown-item" href="day5.html">Day 5</a></li>
+                                <li> <a class="dropdown-item" href="day6.html">Day 6</a></li>
+                                <li> <a class="dropdown-item" href="day7.html">Day 7</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -45,9 +49,13 @@
             </div>
         </nav>
 
-        <button onclick="emma()" style="background: black; color: wheat; border-radius: 20px; padding: 10px; margin: 20px; " >ORDER FOOD</button>
+        <div style="text-align: center;">
+            <button onclick="emma()"
+                style="background: black; color: wheat; border-radius: 20px; padding: 10px; margin: 20px; ">ORDER
+                FOOD</button>
+        </div>
 
-        <pre style="background: black; color: white;"><code>
+        <pre style="background: black; color: wheat;"><code>
             funtion emma() {
 
                 let restaurant = {
@@ -73,55 +81,36 @@
             }
         </code></pre>
 
-
         <script>
-            function emma(){
+            function emma() {
 
-            let restaurant = {
-                Name: "RichBam",
-                African_dish: {
-                    swallow: ['eba', 'fufu', 'amala'],
-                    soup: ['Egusi', 'Fida', 'Okro'],
-                    meat: ['beaf', 'chicken', 'fish'],
+                let restaurant = {
+                    Name: "RichBam",
+                    African_dish: {
+                        swallow: ['eba', 'fufu', 'amala'],
+                        soup: ['Egusi', 'Fida', 'Okro'],
+                        meat: ['beaf', 'chicken', 'fish'],
 
-                },
-                chinese_dish: {
-                    meat: ['frog', 'crab'],
-                    rice: ['chinese rice', 'ofada'],
+                    },
+                    chinese_dish: {
+                        meat: ['frog', 'crab'],
+                        rice: ['chinese rice', 'ofada'],
 
-                },
-                drink: ['coke', 'fanta', 'pepsi'],
-                amount: 4000,
+                    },
+                    drink: ['coke', 'fanta', 'pepsi'],
+                    amount: 4000,
+                }
+
+                alert(`I need a plate of ${restaurant.chinese_dish.rice[1]}, with one lap of ${restaurant.African_dish.meat[1]}. with a bottle of ${restaurant.drink[1]}, and everything should be ${restaurant.amount} naira `);
             }
+        </script>
+        <br><br><br>
 
-            alert(`I need a plate of ${restaurant.chinese_dish.rice[1]}, with one lap of ${restaurant.African_dish.meat[1]}. with a bottle of ${restaurant.drink[1]}, and everything should be ${restaurant.amount} naira `);
-        }
-            </script>
-
+        <footer
+            style="position: fixed; left: 0; bottom: 0; width: 100%; background: white; color: black; text-align: center;">
+            <p>© 2024 Emmanuel Code | Valuemax JavaScript All rights reserved.</p>
+        </footer>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
