@@ -8,6 +8,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+
+    <style>
+        input {
+            border-radius: 20px;
+            border: 2px solid black;
+            width: 130px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .symbol {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 30px;
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            background: #F2EF21;
+            color: black;
+            border-radius: 10px;
+            font-size: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d0d0d0;
+        }
+
+        #myresult {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+
 </head>
 
 
@@ -63,26 +100,19 @@
 
                         <h6 style=" color: black; font-size: 20px;">
                             Simple Calculator
-                        </h6><br>
-
-                        <input type="text" placeholder="Enter Number" id="input1"
-                            style="border-radius: 20px; border: 2px solid black; width: 130px; padding: 10px;">
+                        </h6>
+                        <br>
+                        <input type="text" placeholder="Enter Number" id="input1">
                         <span class="symbol" id="Operator"></span>
-                        <input type="text" placeholder="Enter Number" id="input2"
-                            style="border-radius: 20px; border: 2px solid black; width: 130px; padding: 10px;"><br><br>
-                    </div>
-
-                    <div style="text-align: center;">
-                        <button class="add1btn"
-                            style="width: 60px; height: 60px; background: #F2EF21; color: black; border-radius: 10px; font-size: 30px;">+</button>
-                        <button class="sub1btn"
-                            style="width: 60px; height: 60px; background: #F2EF21; color: black; border-radius: 10px; font-size: 30px">-</button>
-                        <button class="mul1btn"
-                            style="width: 60px; height: 60px; background: #F2EF21; color: black; border-radius: 10px; font-size: 30px">*</button>
-                        <button class="div1btn"
-                            style="width: 60px; height: 60px; background: #F2EF21; color: black; border-radius: 10px; font-size: 30px">/</button>
-
-                        <div class="myanwser" id="myresult"></div>
+                        <input type="text" placeholder="Enter Number" id="input2">
+                        <br><br>
+                        <button class="add1btn" onclick="setOperation('+')">+</button>
+                        <button class="sub1btn" onclick="setOperation('-')">-</button>
+                        <button class="mul1btn" onclick="setOperation('*')">*</button>
+                        <button class="div1btn" onclick="setOperation('/')">/</button>
+                        <br><br>
+                        <button onclick="calculate()">=</button>
+                        <div class="myanswer" id="myresult"></div>
                     </div>
                 </div>
             </div>
@@ -97,13 +127,12 @@
                     <div style="text-align: center;">
 
                         <h6 style=" color: black; font-size: 20px;">
-                            Investment Calculator <br>
-                            ROI @ 20% Month
+                            Investment Calculator
                         </h6><br>
 
-                        <input type="text" id="input1" placeholder="Investment amount"
+                        <input type="text" id="input3" placeholder="Investment amount"
                             style="border-radius: 20px; border: 2px solid black; width: 160px; padding: 10px;">
-                        <select
+                        <select id="months"
                             style="padding: 11px; border-radius:10px; background: #4DBCED; color: black; border: none;">
                             <option value="1">1 month</option>
                             <option value="2">2 months</option>
@@ -113,18 +142,17 @@
                     </div><br>
 
                     <div style="text-align: center;">
-
-                        <button class="addbtn"
-                            style="width: 100px; height: 60px; background: #4DBCED; color: white; border-radius: 20px; font-size: 15px;">Calculate</button>
+                        <button class="addbtn" onclick="calculate1()" style="background: #4DBCED; width: 150px;
+                         border-radius: 15px; margin: 10px;">Calculate</button>
                     </div>
-                    <div class="result" id="anwser">
+                    <div class="result" id="firstanswer"></div>
 
-                    </div>
                 </div>
             </div>
 
 
             <!-- Loan Calculator -->
+
             <div class="card" style="margin: 15px;">
                 <img src="image/house.webp" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -133,9 +161,9 @@
                             Loan Calculator
                         </h6><br>
 
-                        <input class="input3" value="" placeholder="How much do you want to borrow"
+                        <input class="input3" id="loanAmount" placeholder="How much do you want to borrow"
                             style="border-radius: 20px; border: 2px solid black; width: 160px; padding: 10px;">
-                        <select name="" class="input4"
+                        <select id="loanDuration" class="input4"
                             style="padding: 11px; border-radius:10px;background: #CFC294; color: black; border: none;">
                             <option value="1">1 month</option>
                             <option value="2">2 months</option>
@@ -151,96 +179,111 @@
                             <option value="12">12 months</option>
                         </select><br><br>
 
-                        <button class="loan"
-                            style="padding: 10px; border-radius:10px; background: #CFC294; color: black;">Calculate</button>
+                        <button class="loan" id="calculateBtn"
+                            style="padding: 10px; border-radius:10px; width: 150px; background: #CFC294; color: black;">Calculate</button>
+                        <div id="answ"></div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-
-
-
         <script>
+
             // Simple Calculator
 
-            let btnAdd = document.querySelector(".add1btn");
-            let btnSubtract = document.querySelector(".sub1btn");
-            let btnMultiply = document.querySelector(".mul1btn");
-            let btnDivide = document.querySelector(".div1btn");
+            let operation = '';
 
-            let numberone;
-            let numbertwo;
-
-            function cal(symbol, operation) {
-                let input1 = document.querySelector("#input1");
-                let input2 = document.querySelector("#input2");
-                numberone = input1.value
-                numbertwo = input2.value
-                document.getElementById("Operator").innerHTML = symbol;
-                document.getElementById("myresult").innerHTML = `=${operation()}`;
-                document.getElementById("myresult").value = '';
+            function setOperation(main) {
+                operation = main;
+                document.getElementById('Operator').textContent = operation;
             }
 
-            btnAdd.addEventListener("click", () => {
-                cal("+", () => numberone + numbertwo);
-            });
+            function calculate() {
+                let num1Str = document.getElementById('input1').value;
+                let num2Str = document.getElementById('input2').value;
+                let num1 = Number(num1Str);
+                let num2 = Number(num2Str);
+                let result;
 
-            btnSubtract.addEventListener("click", () => {
-                cal("-", () => numberone - numbertwo);
-            });
+                if (!isNaN(num1) && !isNaN(num2) && operation) {
+                    if (operation === '+') {
+                        result = num1 + num2;
+                    } else if (operation === '-') {
+                        result = num1 - num2;
+                    } else if (operation === '*') {
+                        result = num1 * num2;
+                    } else if (operation === '/') {
+                        if (num2 !== 0) {
+                            result = num1 / num2;
+                        } else {
+                            result = 'Cannot divide by zero!';
+                        }
+                    } else {
+                        result = 'Invalid operation';
+                    }
+                } else {
+                    result = 'Invalid input or operation';
+                }
 
-            btnMultiply.addEventListener("click", () => {
-                cal("*", () => numberone * numbertwo);
-            });
-
-            btnDivide.addEventListener("click", () => {
-                cal("/", () => (numbertwo === 0 ? "Cannot divide by zero" : numberone / numbertwo));
-            });
+                document.getElementById('myresult').innerText = ` ${result}`;
+            }
 
 
 
             // Investment calculator
 
-            let Investmentamount = document.querySelector('#input1');
-            let interestRate = 20;
-            let durationSelect = document.querySelector('select');
-            let calculateButton = document.querySelector('.addbtn');
+            function calculate1() {
+                let investmentAmountStr = document.getElementById('input3').value;
+                let durationMonths = Number(document.getElementById('months').value);
 
-            calculateButton.addEventListener('click', () => {
-                let investmentAmount = (Investmentamount.value);
-                let duration = (durationSelect.value);
+                let roiPercentage = 20 / 100;
 
-                let totalInterest = investmentAmount * interestRate / duration;
-                let totalInvest = investmentAmount++ + totalInterest;
+                let investmentAmount = Number(investmentAmountStr);
 
-                document.getElementById('anwser').innerHTML=`At the end of ${duration} months, you will withdraw ${totalInvest} if you invest ${investmentAmount} with us.`
-            });
+                if (isNaN(investmentAmount) || investmentAmount <= 0 || isNaN(durationMonths) || durationMonths <= 0) {
+                    document.getElementById('firstanswer').innerText = 'Please enter a valid investment amount and select a valid duration.';
+                    return;
+                }
 
+                let totalInvest = investmentAmount;
+                for (let i = 0; i < durationMonths; i++) {
+                    totalInvest *= (1 + roiPercentage);
+                }
+
+                document.getElementById('firstanswer').innerText = `At the end of ${durationMonths} months, you will withdraw #${totalInvest} if you invest #${investmentAmount} with us.`;
+            }
 
 
             // Loan Calculator
+            document.getElementById('calculateBtn').addEventListener('click', function () {
 
-            document.getElementById('loan').addEventListener('click',
-                function () {
-                    let Loan = document.getElementById('.input3').value;
-                    let duration = document.getElementById('.input4').value;
-                    let Interest = 0.25 * Loan;
-                    let totalloan = Number(Loan) + Number(Interest);
-                    let monthlyrepay = totalloan / duration
-                    let answer = document.getElementById('answ').innerHTML =
+                let loanAmount = Number(document.getElementById('loanAmount').value);
+                let duration = Number(document.getElementById('loanDuration').value);
 
-                    `${totalloan} is total amount to return for ${duration} months and ${monthlyrepay} is amount to pay monthly`
 
+                if (isNaN(loanAmount) || loanAmount <= 0 || isNaN(duration) || duration <= 0) {
+                    document.getElementById('answ').innerText = 'Please enter valid Loan amount and select a valid duration.';
+                    return;
                 }
-            );
 
+                let interestRate = 0.25;
+                let interest = interestRate * loanAmount;
+                let totalLoan = loanAmount + interest;
+                let monthlyRepayment = totalLoan / duration;
 
+                document.getElementById('answ').innerHTML = `#${totalLoan} is total amount to return in 
+                ${duration} months and #${monthlyRepayment} is amount to pay monthly`;
+
+            });
         </script>
+
+        <footer
+            style="width: 100%; background: white; color: black; text-align: center;">
+            <p>© 2024 Emmanuel Code | Valuemax JavaScript All rights reserved.</p>
+        </footer>
+
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

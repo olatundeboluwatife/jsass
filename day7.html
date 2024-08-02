@@ -51,101 +51,92 @@
         </nav>
 
        
-        <h1>
-            Guess My Number
-        </h1>
-        <h6 id="guessnow">
-            Guess a number between 45 and 75
-        </h6>
-    
-        <input type="text" id="myinput" placeholder="Guess a number">
-        
-        <h3 id="shownumber">Start guessing.....</h3>
-        
-        <button id="checkit" style="border: 2px solid black; padding: 15px; border-radius: 20px;">Check</button>
-        <button id="playagain" style="display: none;">Play Again</button> 
-    
-        <h2 id="highestscore"></h2> 
+        <div class="container">
+            <h1>Guess My Number</h1>
+            <p>Guess a number between 45 and 60</p>
+            <input type="text" id="myinput" placeholder="Guess a number" />
+            <button id="checkit">Check</button>
+            <button id="playagain" style="display: none">Play Again</button>
+            <h2 id="guessnow">Start guessing....</h2>
+            <h3 id="shownumber" style="display: none">The number is ??</h3>
+            <div class="current-score">
+              Current Score: <span id="currentscore"></span>
+            </div>
+            <div class="highest-score">
+              Highest Score:<span id="highestscore">0</span>
+            </div>
+          </div>
        
     
         <script>
-           let guessnow = document.getElementById('guessnow');
-           let shownumber = document.getElementById('shownumber');
-           let btncheck = document.getElementById('checkit');
-           let btnplayagain = document.getElementById('playagain')
-           let highestscore = document.getElementById('highestscore');
-    
-           let secretNumber =  Math.trunc(Math.random() *20) + 55;
-           let score = 10;
-           let xscore = 0;
-    
-           function scoreline(){
-            score -=2; 
-            if(score == 0){
-                guessnow.innerHTML='Game Over';
-                document.querySelector('body').style.color='white';
-                document.querySelector('body').style.background='red';
-                shownumber.innerHTML= `The number was actually ${secretNumber}`;
-                guessnow.style.color='white';
-                btnplayagain.style.display='inline-block';
+            let guessnow = document.getElementById("guessnow");
+            let shownumber = document.getElementById("shownumber");
+            let btncheck = document.getElementById("checkit");
+            let btnplayagain = document.getElementById("playagain");
+            let highestscore = document.getElementById("highestscore");
+            let currentscore = document.getElementById("currentscore");
+            let secretNumber = Math.trunc(Math.random() * 16) + 45;
+            let score = 10;
+            let xscore = 0;
+      
+            function scoreline() {
+              score -= 2;
+              currentscore.innerHTML = score;
+              if (score == 0) {
+                guessnow.innerHTML = "Game Over";
+                guessnow.style.color = "white";
+                guessnow.style.backgroundColor = "red";
+                shownumber.innerHTML = `The number was actually ${secretNumber}`;
+                shownumber.style.display = "block";
+                btnplayagain.style.display = "inline-block";
+              }
             }
-           }
-           
-           function guesengine(){
-            let myGues = Number(document.getElementById("myinput").value); 
-    
-           if(isNaN(myGues)){ 
-            guessnow.innerHTML='Invalid input';
-            scoreline();
-            document.getElementById('myinput').value=''; 
-            document.getElementById('myinput').focus(); 
-           }
-           else if(myGues > secretNumber){ 
-            guessnow.innerHTML='Your Guess is too high';
-            guessnow.style.color='red';
-            scoreline();
-            document.getElementById('myinput').value='';
-            document.getElementById('myinput').focus(); 
-           }
-           else if(myGues < secretNumber){
-            guessnow.innerHTML='Your Guess is too low';
-            guessnow.style.color='blue';
-            scoreline();
-            document.getElementById('myinput').value='';
-            document.getElementById('myinput').focus(); 
-           }
-           else{
-            guessnow.innerHTML='Correct';
-            document.querySelector('body').style.color='white';
-            document.querySelector('body').style.background='green';
-            shownumber.innerHTML = `The number is ${secretNumber}`; 
-            btncheck.style.display='none';
-            btnplayagain.style.display='inline-block';
-            if(score > xscore){
-                xscore = score;
-                highestscore.innerHTML =  xscore;
+      
+            function guesengine() {
+              let myGues = Number(document.getElementById("myinput").value);
+      
+              if (isNaN(myGues)) {
+                guessnow.innerHTML = "Invalid input";
+                scoreline();
+                document.getElementById("myinput").value = "";
+                document.getElementById("myinput").focus();
+              } else if (myGues > secretNumber) {
+                guessnow.innerHTML = "Your Guess is too high";
+                guessnow.style.color = "red";
+                scoreline();
+                document.getElementById("myinput").value = "";
+                document.getElementById("myinput").focus();
+              } else if (myGues < secretNumber) {
+                guessnow.innerHTML = "Your Guess is too low";
+                guessnow.style.color = "blue";
+                scoreline();
+                document.getElementById("myinput").value = "";
+                document.getElementById("myinput").focus();
+              } else {
+                guessnow.innerHTML = "Correct";
+                guessnow.style.color = "green";
+                shownumber.innerHTML = `The number is ${secretNumber}`;
+                if (score > xscore) {
+                  xscore = score;
+                  highestscore.innerHTML = xscore;
+                }
+              }
             }
-           }
-        }
-    
-           btncheck.addEventListener('click', guesengine);
-           btnplayagain.addEventListener('click', function(){
-            guessnow.innerHTML= `Start Guessing.....`;
-            guessnow.style.color='black';
-            document.querySelector('body').style.color='black';
-            document.querySelector('body').style.background='white';
-            shownumber.innerHTML=`The number is ??`;
-            btncheck.style.display='inline-block'; 
-            btnplayagain.style.display='none';
-            secretNumber = Math.trunc(Math.random() *20) +55;
-            score=10;
-
-           });
-    
-        </script>
+      
+            btncheck.addEventListener("click", guesengine);
+            btnplayagain.addEventListener("click", function () {
+              guessnow.innerHTML = `Start Guessing....`;
+              guessnow.style.color = "black";
+              document.getElementById("myinput").value = "";
+              document.getElementById("myinput").focus();
+              secretNumber = Math.trunc(Math.random() * 16) + 45;
+              score = 10;
+              currentscore.innerHTML = score;
+              shownumber.style.display = "none";
+            });
+          </script>
 
         
-
         <footer
             style="position: fixed; left: 0; bottom: 0; width: 100%; background: white; color: black; text-align: center;">
             <p>© 2024 Emmanuel Code | Valuemax JavaScript All rights reserved.</p>
@@ -160,5 +151,4 @@
         crossorigin="anonymous"></script>
 
 </body>
-
 </html>
